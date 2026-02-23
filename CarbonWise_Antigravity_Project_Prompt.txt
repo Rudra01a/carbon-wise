@@ -1,0 +1,547 @@
+
+================================================================================
+         CARBON-WISE — ANTIGRAVITY PROJECT PROMPT & FULL WORKFLOW DOCUMENT
+         Industry-Ready Lifecycle Vehicle Comparison Engine (India-First)
+================================================================================
+
+DOCUMENT VERSION  : 1.0
+PROBLEM STATEMENT : 2 — Sustainable Mobility
+TEAM TARGET       : Hackathon / Early-Stage Startup
+STACK CATEGORY    : Full-Stack Web + Data Engineering + AI/ML Layer
+
+
+================================================================================
+SECTION 1 — PROJECT VISION & MISSION
+================================================================================
+
+PROJECT NAME      : Carbon-Wise
+TAGLINE           : "Know Before You Drive. Compare Before You Buy."
+
+VISION:
+Carbon-Wise is India's first Lifecycle Carbon Intelligence Platform for vehicles.
+It is not a car comparison website. It is a truth engine — one that cuts through
+manufacturer marketing, greenwashing, and fragmented data to give every Indian
+consumer a single, honest number: the true environmental cost of owning a vehicle
+over its entire lifetime.
+
+MISSION:
+To become the definitive "carbon label" for every vehicle sold in India, enabling
+consumers, fleet operators, corporates, and policymakers to make emissions-informed
+decisions — backed by real Indian data, real Indian driving conditions, and real
+Indian grid intensity — not European or American benchmarks.
+
+
+================================================================================
+SECTION 2 — THE CORE PROBLEM (Expanded)
+================================================================================
+
+The Indian automotive market is growing at 8% annually. EVs are being aggressively
+marketed as "zero emission" or "green" solutions. But this is misleading for three
+critical reasons:
+
+  1. MANUFACTURING BLIND SPOT
+     A Tata Nexon EV has a 40.5 kWh battery. Producing that battery emits
+     approximately 6,000–8,100 kg of CO₂ before the car even leaves the factory.
+     No marketing brochure mentions this.
+
+  2. INDIA GRID PROBLEM
+     India's electricity grid carbon intensity is 0.71–0.82 kg CO₂/kWh (CEA 2024),
+     nearly 3x cleaner grids in France or Norway. An EV charged in Jharkhand (coal-
+     heavy grid) may emit more lifecycle CO₂ than a well-tuned CNG vehicle in Mumbai.
+     No platform accounts for this at a state level.
+
+  3. END-OF-LIFE VOID
+     India has no large-scale EV battery recycling infrastructure. Batteries going
+     to landfill carry a hidden carbon and toxicity penalty that is never disclosed.
+
+RESULT: Consumers are making ₹10–50 lakh purchase decisions with fundamentally
+incomplete environmental information. Carbon-Wise fixes this.
+
+
+================================================================================
+SECTION 3 — FULL PROJECT REQUIREMENTS
+================================================================================
+
+--------------------------------------------------
+3A. MANDATORY PLATFORM FEATURES
+--------------------------------------------------
+
+[F1] LIFECYCLE CARBON CALCULATOR (CORE ENGINE)
+  - Input: Vehicle model, user's state/city, daily mileage (km/day),
+           ownership period (years), usage pattern (city/highway/mixed)
+  - Formula:
+      Total Carbon Cost =
+          Manufacturing Emissions (kg CO₂)
+        + [Daily Mileage × 365 × Ownership Years × Operational Emission Factor]
+        + Battery Disposal Emissions (kg CO₂)  ← EVs/Hybrids only
+
+  - Operational Emission Factor by type:
+      ICE Petrol  : (Fuel consumption L/100km / 100) × 2.31 kg CO₂/L
+      ICE Diesel  : (Fuel consumption L/100km / 100) × 2.68 kg CO₂/L
+      CNG         : (CNG consumption kg/100km / 100) × 2.75 kg CO₂/kg
+      EV          : (Energy consumption Wh/km / 1000) × State Grid Intensity
+                    × Charging loss factor (1.15)
+      Hybrid      : Weighted blend of petrol + battery logic
+
+  - All efficiency figures must use MIDC (Modified Indian Driving Cycle) or
+    WMTC data, NOT WLTP or EPA figures.
+
+[F2] STATE-WISE GRID INTENSITY MODULE
+  - Dropdown for Indian state selection
+  - Dynamic mapping to CEA-published grid intensity (kg CO₂/kWh)
+  - Auto-updates EV operational emission calculation in real time
+  - Visual indicator: Green (clean grid) to Red (coal-heavy grid) per state
+
+[F3] VEHICLE COMPARISON DASHBOARD
+  - Side-by-side comparison of up to 4 vehicles
+  - Stacked bar chart: Manufacturing vs Operational vs Disposal breakdown
+  - Breakeven point graph: "At your mileage, EV becomes cleaner than ICE at X years"
+  - Filter by: vehicle type, budget, seating capacity, fuel type
+
+[F4] SMART RECOMMENDATION ENGINE
+  - User enters mileage + state + ownership years + budget
+  - System returns Top 3 vehicles with lowest net carbon footprint
+  - Explains reasoning in plain language (not just a score)
+  - Example output: "At 40 km/day in Karnataka for 7 years, the Maruti CNG
+    Grand Vitara has a lower total footprint than the Tata Nexon EV due to
+    Karnataka's improving but still moderate grid intensity."
+
+[F5] GREENWASHING DETECTION FLAGS
+  - Rule-based flags triggered automatically:
+      → "Zero Emission" claim on vehicle with battery manufacturing > 5,000 kg CO₂
+      → WLTP mileage claim without MIDC equivalent available
+      → EV marketed as "clean" in states with grid intensity > 0.75 kg CO₂/kWh
+      → No disclosed battery recycling program from manufacturer
+  - Each flag shows: What the claim is, Why it's misleading, What the real data shows
+
+[F6] TOTAL COST OF OWNERSHIP (TCO) OVERLAY
+  - Optional layer showing financial cost alongside carbon cost
+  - Inputs: current fuel price, electricity tariff (state-wise), insurance estimate
+  - Output: Combined "Carbon + Cost" score — unique to Carbon-Wise
+
+
+--------------------------------------------------
+3B. DIFFERENTIATING FEATURES (Out-of-the-Box)
+--------------------------------------------------
+
+[D1] INDIA CARBON PASSPORT — THE BIG DIFFERENTIATOR
+  Every vehicle gets a "Carbon Passport" — a single-page shareable certificate
+  showing its lifecycle carbon profile in an Indian context.
+  - QR code scannable at dealerships
+  - Downloadable PDF with verified data sources cited
+  - Can be shared on social media ("I chose this car because...")
+  - This is the "nutritional label" the problem statement calls for — made real
+  - Future monetization: Dealerships pay to display verified Carbon Passports
+
+[D2] FLEET CARBON OPTIMIZER (B2B ANGLE)
+  Target corporate fleets, logistics companies, and cab aggregators.
+  - Upload CSV of current fleet vehicles
+  - Platform calculates total fleet carbon footprint
+  - Recommends a transition roadmap: "Replace these 12 diesel vehicles with CNG
+    first. Your next 8 replacements should be EVs once Karnataka grid cleans up."
+  - ESG Report generator for corporate compliance (BRSR reporting in India)
+  - This opens a B2B revenue channel beyond the consumer app
+
+[D3] CARBON BREAKEVEN TIMELINE SIMULATOR
+  An interactive animated graph showing:
+  - Month-by-month carbon debt of a new EV vs a petrol car
+  - The exact month when the EV "pays back" its manufacturing emissions
+  - Sensitivity sliders: "What if grid gets 20% cleaner by 2027?" — graph updates live
+  - This is a viral, shareable feature that no competitor has
+
+[D4] DEALER GREENWASH SCANNER (Chrome Extension — Bonus)
+  A lightweight Chrome extension that:
+  - Detects when a user is on a car manufacturer website or Cardekho/CarWale
+  - Pulls the vehicle name and overlays Carbon-Wise data in a sidebar
+  - Shows real carbon score next to advertised specs
+  - Creates a constant touchpoint without requiring users to visit the platform
+
+[D5] COMMUNITY REAL-WORLD DATA LAYER
+  - Allow verified users to submit their actual mileage and energy consumption
+  - Build India's first crowdsourced real-world efficiency database
+  - Show "Lab Efficiency" vs "Community Reported Efficiency" side by side
+  - This creates a data moat competitors cannot easily replicate
+
+[D6] REGIONAL LANGUAGE SUPPORT
+  Launch in English + Hindi + Tamil + Kannada
+  Carbon literacy is not just an urban English-speaking problem.
+  Regional language support makes Carbon-Wise accessible to Tier 2/3 markets
+  where EV adoption decisions are being made right now.
+
+
+================================================================================
+SECTION 4 — TECHNICAL ARCHITECTURE
+================================================================================
+
+--------------------------------------------------
+4A. FRONTEND
+--------------------------------------------------
+  Framework   : React.js (with TypeScript)
+  UI Library  : Tailwind CSS + ShadCN components
+  Charts      : Recharts (primary) + D3.js (for breakeven simulator)
+  State Mgmt  : Zustand or Redux Toolkit
+  Routing     : React Router v6
+  i18n        : react-i18next (for multilingual support)
+
+--------------------------------------------------
+4B. BACKEND
+--------------------------------------------------
+  Runtime     : Node.js with Express OR Python with FastAPI
+  Database    : PostgreSQL (vehicle + emissions data) + Redis (caching)
+  ORM         : Prisma (Node) or SQLAlchemy (Python)
+  Auth        : JWT-based for community data submission feature
+  File Export : PDFKit or Puppeteer (for Carbon Passport PDF generation)
+
+--------------------------------------------------
+4C. DATA LAYER
+--------------------------------------------------
+  Primary Store   : PostgreSQL with structured vehicle schema (see Section 5)
+  Data Pipeline   : Python scripts for scraping + normalizing from:
+                      - ARAI (arai-india.com) — MIDC efficiency figures
+                      - CEA (cea.nic.in) — State grid intensity
+                      - PPAC India — Fuel prices
+                      - Manufacturer websites — Battery specs, vehicle weight
+                      - SMEV — EV-specific data
+  Scraping Tools  : BeautifulSoup + Selenium for dynamic pages
+  Data Validation : Pydantic schemas to enforce data integrity on ingestion
+  Update Schedule : Grid intensity refreshed quarterly; fuel prices weekly
+
+--------------------------------------------------
+4D. AI / ML LAYER (Differentiator)
+--------------------------------------------------
+  Model 1 — Emission Predictor:
+    For vehicles with incomplete LCA data, use a regression model trained on
+    available vehicle attributes (weight, engine size, battery kWh) to estimate
+    missing manufacturing emission figures.
+    Stack: scikit-learn or XGBoost, deployed via FastAPI endpoint
+
+  Model 2 — Recommendation Ranker:
+    Multi-factor ranking model that weights carbon footprint, user mileage,
+    grid trajectory (state's renewable energy growth rate), and budget.
+    Returns personalized Top 3 with explanation text (template-based NLG).
+
+  Model 3 — Greenwash Classifier (Advanced):
+    NLP model (fine-tuned distilBERT) that scans manufacturer claim text
+    and classifies it as Accurate / Misleading / Unverifiable.
+    Training data: Verified claim text from ARAI reports vs marketing copy.
+
+--------------------------------------------------
+4E. DEPLOYMENT
+--------------------------------------------------
+  Hosting         : AWS EC2 (backend) + S3 + CloudFront (frontend)
+               OR  Vercel (frontend) + Railway/Render (backend)
+  CI/CD           : GitHub Actions
+  Containerization: Docker + Docker Compose for local dev
+  Monitoring      : Sentry (errors) + Posthog (analytics)
+
+
+================================================================================
+SECTION 5 — DATABASE SCHEMA (Core Tables)
+================================================================================
+
+TABLE: vehicles
+  id                    UUID PRIMARY KEY
+  make                  VARCHAR        -- e.g., Tata, Maruti, Hyundai
+  model                 VARCHAR        -- e.g., Nexon EV, Baleno CNG
+  variant               VARCHAR        -- e.g., XZ+, LXI
+  fuel_type             ENUM           -- PETROL, DIESEL, CNG, ELECTRIC, HYBRID
+  manufacture_year      INT
+  country_of_assembly   VARCHAR
+  kerb_weight_kg        FLOAT
+  engine_displacement_cc INT           -- NULL for EVs
+  battery_capacity_kwh  FLOAT          -- NULL for ICE/CNG
+  bs_norm               VARCHAR        -- BS6, BS4, etc.
+  midc_efficiency       FLOAT          -- km/L or km/kWh or km/kg
+  wltp_efficiency       FLOAT          -- for reference/comparison
+  manufacturing_emissions_kg FLOAT     -- from LCA studies
+  disposal_emissions_kg FLOAT
+  has_recycling_program BOOLEAN
+  data_source           VARCHAR        -- ARAI / Manufacturer / Estimated
+  last_updated          TIMESTAMP
+
+TABLE: state_grid_intensity
+  state_name            VARCHAR PRIMARY KEY
+  intensity_kg_per_kwh  FLOAT
+  renewable_pct         FLOAT
+  data_year             INT
+  source                VARCHAR        -- CEA report reference
+
+TABLE: fuel_prices
+  fuel_type             VARCHAR
+  state_name            VARCHAR
+  price_per_unit        FLOAT          -- ₹ per litre / kg / kWh
+  unit                  VARCHAR
+  updated_date          DATE
+
+TABLE: community_reports
+  id                    UUID PRIMARY KEY
+  vehicle_id            UUID FOREIGN KEY
+  user_state            VARCHAR
+  reported_efficiency   FLOAT
+  usage_pattern         ENUM           -- CITY, HIGHWAY, MIXED
+  verified              BOOLEAN
+  submitted_at          TIMESTAMP
+
+
+================================================================================
+SECTION 6 — COMPLETE WORKFLOW (End to End)
+================================================================================
+
+PHASE 0 — SETUP (Days 1–2)
+  [0.1] Initialize GitHub monorepo with /frontend, /backend, /data-pipeline folders
+  [0.2] Set up Docker Compose with PostgreSQL + Redis containers
+  [0.3] Create database and run initial migrations (schema from Section 5)
+  [0.4] Set up basic Express/FastAPI skeleton with health check endpoint
+  [0.5] Initialize React app with Tailwind, routing structure, and placeholder pages
+
+PHASE 1 — DATA COLLECTION & PIPELINE (Days 2–4)
+  [1.1] Write Python scraper for ARAI website → extract MIDC efficiency per vehicle
+  [1.2] Write parser for CEA Annual Report PDFs → extract state grid intensity table
+  [1.3] Manually compile battery capacity + manufacturing emission estimates for
+        top 30 Indian vehicles (Nexon EV, Tigor EV, ZS EV, Grand Vitara, Creta,
+        Baleno CNG, Brezza, City Hybrid, etc.)
+  [1.4] Write data validation layer using Pydantic to reject malformed entries
+  [1.5] Run ingestion script → populate PostgreSQL vehicles + grid_intensity tables
+  [1.6] Validate: manually spot-check 5 vehicles against known published LCA data
+  [1.7] Set up PPAC fuel price scraper with weekly cron job
+
+PHASE 2 — BACKEND API DEVELOPMENT (Days 3–6)
+  [2.1] Build /api/vehicles endpoint — list, filter, search
+  [2.2] Build /api/calculate endpoint — core LCA formula logic
+         Input: vehicle_id, state, daily_km, years, usage_pattern
+         Output: manufacturing_kg, operational_kg, disposal_kg, total_kg
+  [2.3] Build /api/compare endpoint — accepts array of vehicle_ids, returns
+         side-by-side calculation results
+  [2.4] Build /api/recommend endpoint — accepts user profile, returns Top 3
+  [2.5] Build /api/greenwash/:vehicle_id — returns applicable flags for a vehicle
+  [2.6] Build /api/carbon-passport/:vehicle_id — generates PDF passport
+  [2.7] Build /api/grid-intensity — returns all states with current intensity
+  [2.8] Write unit tests for the LCA formula covering all fuel types
+  [2.9] Set up Redis caching for vehicle list and grid intensity (TTL: 6 hours)
+
+PHASE 3 — FRONTEND DEVELOPMENT (Days 4–8)
+  [3.1] Build global layout: Navbar, Footer, theme (dark/light toggle)
+  [3.2] HOME PAGE
+         - Hero: "Find the truly greenest car for your life"
+         - Quick calculator widget (mileage + state + years → instant top result)
+         - How it works section (3 steps: Enter → Compare → Decide)
+  [3.3] COMPARE PAGE
+         - Vehicle search + select (up to 4 vehicles)
+         - Stacked bar chart (manufacturing / operational / disposal)
+         - Summary table with total carbon scores
+         - Breakeven point graph (D3.js animated line chart)
+         - Greenwashing flags displayed per vehicle card
+  [3.4] RECOMMENDATION PAGE
+         - User input form: state, daily km, years, budget
+         - Results: Top 3 cards with carbon score + plain-language explanation
+         - "Why this recommendation?" expandable section
+  [3.5] VEHICLE DETAIL PAGE
+         - Full Carbon Passport view
+         - Data sources cited
+         - Community reported efficiency (if available)
+         - Share + Download buttons
+  [3.6] FLEET OPTIMIZER PAGE (B2B)
+         - CSV upload interface
+         - Fleet carbon summary dashboard
+         - Transition roadmap output
+  [3.7] Connect all pages to backend API endpoints
+  [3.8] Add loading skeletons, error states, and empty states
+
+PHASE 4 — AI/ML INTEGRATION (Days 6–9)
+  [4.1] Train emission predictor model on available vehicle dataset
+         Features: battery_kwh, kerb_weight, fuel_type, engine_cc
+         Target: manufacturing_emissions_kg
+         Use to fill gaps in dataset where LCA data is unavailable
+  [4.2] Integrate prediction endpoint into data pipeline
+         — if manufacturing_emissions not available → call ML model → store estimate
+         — flag estimated values with data_source = 'ML_ESTIMATED'
+  [4.3] Build recommendation ranker
+         — Score = weighted(carbon_score, user_mileage_fit, grid_trajectory, budget)
+         — Generate explanation text from template library
+  [4.4] (Stretch) Fine-tune greenwash classifier on curated claim dataset
+
+PHASE 5 — DIFFERENTIATORS BUILD (Days 8–11)
+  [5.1] CARBON PASSPORT PDF
+         — Puppeteer renders vehicle detail page to PDF
+         — Add QR code linking back to live page
+         — Branded with data sources and timestamp
+  [5.2] BREAKEVEN SIMULATOR
+         — D3.js interactive animated graph
+         — Sliders: grid improvement rate, fuel price trajectory
+         — Real-time recalculation on slider change
+  [5.3] COMMUNITY DATA SUBMISSION
+         — Form: vehicle, state, real-world km/L or Wh/km, usage pattern
+         — JWT auth for submission (Google OAuth login)
+         — Admin moderation queue before data goes live
+  [5.4] FLEET CSV UPLOAD + ESG REPORT
+         — Parse uploaded fleet CSV
+         — Run batch LCA calculations
+         — Generate downloadable ESG summary PDF
+
+PHASE 6 — TESTING & HARDENING (Days 10–12)
+  [6.1] Test LCA formula against 3 published lifecycle studies
+         (IIT Bombay 2022 EV study, ICCT India 2023 report)
+  [6.2] Cross-browser testing (Chrome, Firefox, Safari mobile)
+  [6.3] Performance: Lighthouse score target > 85
+  [6.4] API load testing: simulate 100 concurrent compare requests
+  [6.5] Data accuracy audit: verify 10 random vehicles against ARAI source
+  [6.6] Accessibility check: WCAG 2.1 AA compliance for key flows
+
+PHASE 7 — DEPLOYMENT & LAUNCH (Days 12–14)
+  [7.1] Dockerize frontend and backend
+  [7.2] Deploy backend to Railway or AWS EC2
+  [7.3] Deploy frontend to Vercel
+  [7.4] Configure environment variables and secrets
+  [7.5] Set up GitHub Actions CI pipeline (lint → test → deploy)
+  [7.6] Configure Sentry error monitoring
+  [7.7] Final smoke test on production URL
+  [7.8] Prepare demo script and presentation
+
+
+================================================================================
+SECTION 7 — DEMO SCRIPT FOR PRESENTATION
+================================================================================
+
+SCENARIO: "Meet Arjun. He lives in Pune, drives 45 km a day for work, plans to
+keep his next car for 6 years, and has a budget of ₹18 lakhs. He wants to make
+the greenest choice."
+
+STEP 1: Arjun visits Carbon-Wise. Enters: Pune (Maharashtra), 45 km/day, 6 years.
+STEP 2: Recommendation page returns Top 3:
+          #1 — Maruti Suzuki Grand Vitara CNG (Total: 28,400 kg CO₂)
+          #2 — Tata Nexon EV (Total: 31,200 kg CO₂)
+          #3 — Hyundai Creta Petrol (Total: 42,800 kg CO₂)
+STEP 3: Arjun is surprised. He expected the Nexon EV to win.
+         The explanation says: "Maharashtra's grid intensity is 0.83 kg CO₂/kWh.
+         The Nexon EV's battery manufacturing debt of 7,290 kg CO₂ takes 7.2 years
+         to offset at your mileage. The CNG variant wins within your 6-year window."
+STEP 4: Arjun clicks the Breakeven Simulator. He moves the "Grid Improvement" slider
+         to +25% cleaner by 2027 (India's stated renewable target).
+         → The graph updates live. The EV now breaks even at 5.1 years.
+         → He decides to wait 18 months for grid improvement or buy CNG now.
+STEP 5: Arjun downloads the Carbon Passport for the Grand Vitara CNG to show
+         his family. Shares it on WhatsApp.
+STEP 6 (B2B Demo): Switch to Fleet Optimizer.
+         Upload CSV of 50-vehicle logistics fleet.
+         Platform shows: "Your fleet emits 2,840 tonnes CO₂/year. Replacing your
+         15 oldest diesel trucks with CNG reduces this by 34% at lowest capital cost."
+
+RESULT: The judges see a complete, real, India-specific product — not a prototype.
+
+
+================================================================================
+SECTION 8 — COMPETITIVE DIFFERENTIATION MATRIX
+================================================================================
+
+FEATURE                          | Carbon-Wise | CarWale/CardEkho | Global Tools
+---------------------------------|-------------|------------------|-------------
+India-specific grid intensity    |     YES     |       NO         |     NO
+MIDC vs WLTP correction          |     YES     |       NO         |     NO
+Lifecycle (Mfg+Ops+Disposal)     |     YES     |       NO         | Partial
+Greenwash detection flags        |     YES     |       NO         |     NO
+Carbon Passport (shareable PDF)  |     YES     |       NO         |     NO
+Breakeven timeline simulator     |     YES     |       NO         |     NO
+Fleet ESG optimizer              |     YES     |       NO         |     NO
+Community real-world data        |     YES     |    Partial       |     NO
+CNG vehicle support              |     YES     |       NO         |     NO
+Regional language support        |     YES     |    Partial       |     NO
+ML-estimated data gap filling    |     YES     |       NO         |     NO
+
+
+================================================================================
+SECTION 9 — MONETIZATION ROADMAP (Post-Hackathon Vision)
+================================================================================
+
+TIER 1 — FREE (User Acquisition)
+  Full comparison, recommendation, and Carbon Passport for all users.
+
+TIER 2 — DEALER / MANUFACTURER API (B2B SaaS)
+  Automakers and dealerships pay a monthly fee to:
+  - Display verified Carbon Passports on their listings
+  - Access bulk comparison API for their inventory
+  - Receive greenwash compliance reports before campaign launch
+
+TIER 3 — FLEET ENTERPRISE
+  Annual subscription for fleet operators and logistics companies.
+  Includes ESG reporting module, BRSR compliance output, custom data ingestion.
+
+TIER 4 — POLICY & RESEARCH DATA LICENSING
+  Anonymized, aggregated dataset of vehicle carbon comparisons licensed to:
+  - Government bodies (MoRTH, NITI Aayog)
+  - Environmental NGOs and research institutions
+  - Auto industry analysts
+
+
+================================================================================
+SECTION 10 — KEY METRICS TO TRACK (Post-Launch)
+================================================================================
+
+  - Monthly Active Users (MAU)
+  - Comparisons run per day
+  - Carbon Passports downloaded
+  - Fleet optimizer CSV uploads
+  - Community efficiency reports submitted
+  - Average session duration on Breakeven Simulator
+  - Dealer API API calls per month
+  - Data accuracy score (community vs ARAI reported efficiency delta)
+
+
+================================================================================
+SECTION 11 — TEAM ROLE DIVISION (Suggested)
+================================================================================
+
+  MEMBER 1 — Data Engineer
+    Owns: Data pipeline, scraping scripts, database schema, grid intensity module
+
+  MEMBER 2 — Backend Developer
+    Owns: API endpoints, LCA formula engine, recommendation logic, caching
+
+  MEMBER 3 — Frontend Developer
+    Owns: All React pages, chart integrations, responsive design, UX flow
+
+  MEMBER 4 — ML Engineer / Full-Stack Support
+    Owns: Emission predictor model, greenwash classifier, breakeven simulator,
+          Carbon Passport PDF generation
+
+  MEMBER 5 — Product / Design Lead
+    Owns: Figma prototype, demo script, presentation, competitive research,
+          user testing and feedback loop
+
+
+================================================================================
+SECTION 12 — REFERENCES & DATA SOURCES
+================================================================================
+
+  1. CEA (Central Electricity Authority) — CO2 Baseline Database
+     https://cea.nic.in/co2-baseline-database/
+
+  2. ARAI (Automotive Research Association of India) — Test Reports
+     https://www.araiindia.com
+
+  3. PPAC India — Petroleum & Natural Gas Statistics
+     https://ppac.gov.in
+
+  4. SMEV — Society of Manufacturers of Electric Vehicles
+     https://smev.in
+
+  5. ICCT India — EV Lifecycle Emissions Study (2023)
+     https://theicct.org/india
+
+  6. VAHAN Portal — Vehicle Registration Data
+     https://vahan.parivahan.gov.in
+
+  7. MoRTH — BS6 Emission Norms
+     https://morth.nic.in
+
+  8. IIT Bombay — Lifecycle Assessment of EVs in Indian Context (2022)
+     Published in Journal of Cleaner Production
+
+  9. BloombergNEF — Battery Price Survey (for manufacturing cost estimates)
+
+  10. European Environment Agency — LCA Methodology Reference
+      https://www.eea.europa.eu
+
+
+================================================================================
+         END OF DOCUMENT — CARBON-WISE ANTIGRAVITY PROJECT PROMPT v1.0
+================================================================================
